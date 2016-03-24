@@ -4,7 +4,7 @@ package steam
 import (
 	"encoding/json"
 	"errors"
-	"github.com/markbates/goth"
+	"github.com/piazzamp/goth"
 	"io/ioutil"
 	"net/http"
 	"net/url"

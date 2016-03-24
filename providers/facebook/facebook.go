@@ -6,7 +6,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
-	"github.com/markbates/goth"
+	"github.com/piazzamp/goth"
 	"golang.org/x/oauth2"
 	"io"
 	"io/ioutil"

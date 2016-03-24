@@ -4,7 +4,7 @@ package yammer
 
 import (
 	"errors"
-	"github.com/markbates/goth"
+	"github.com/piazzamp/goth"
 	"golang.org/x/oauth2"
 	"strconv"
 )

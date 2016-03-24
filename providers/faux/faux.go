@@ -4,7 +4,7 @@ package faux
 
 import (
 	"encoding/json"
-	"github.com/markbates/goth"
+	"github.com/piazzamp/goth"
 	"golang.org/x/oauth2"
 	"strings"
 )

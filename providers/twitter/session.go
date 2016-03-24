@@ -3,7 +3,7 @@ package twitter
 import (
 	"encoding/json"
 	"errors"
-	"github.com/markbates/goth"
+	"github.com/piazzamp/goth"
 	"github.com/mrjones/oauth"
 	"strings"
 )

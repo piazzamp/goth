@@ -4,7 +4,7 @@ package salesforce
 
 import (
 	"encoding/json"
-	"github.com/markbates/goth"
+	"github.com/piazzamp/goth"
 	"golang.org/x/oauth2"
 	"io"
 	"net/http"

@@ -5,8 +5,9 @@ package gplus
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/markbates/goth"
+	"github.com/piazzamp/goth"
 	"golang.org/x/oauth2"
+	//"google.golang.org/appengine"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -145,7 +146,7 @@ func (p *Provider) RefreshTokenAvailable() bool {
 //RefreshToken get new access token based on the refresh token
 func (p *Provider) RefreshToken(refreshToken string) (*oauth2.Token, error) {
 	token := &oauth2.Token{RefreshToken: refreshToken}
-	ts := p.config.TokenSource(oauth2.NoContext, token)
+	ts := p.config.TokenSource(cont, token)
 	newToken, err := ts.Token()
 	if err != nil {
 		return nil, err

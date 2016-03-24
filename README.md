@@ -10,12 +10,12 @@ This package was inspired by [https://github.com/intridea/omniauth](https://gith
 
 ## Docs
 
-The API docs can be found at [http://godoc.org/github.com/markbates/goth](http://godoc.org/github.com/markbates/goth)
+The API docs can be found at [http://godoc.org/github.com/piazzamp/goth](http://godoc.org/github.com/piazzamp/goth)
 
 ## Installation
 
 ```text
-$ go get github.com/markbates/goth
+$ go get github.com/piazzamp/goth
 ```
 
 ## Supported Providers

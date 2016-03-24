@@ -3,8 +3,8 @@ package github_test
 import (
 	"testing"
 
-	"github.com/markbates/goth"
-	"github.com/markbates/goth/providers/github"
+	"github.com/piazzamp/goth"
+	"github.com/piazzamp/goth/providers/github"
 	"github.com/stretchr/testify/assert"
 )
 
