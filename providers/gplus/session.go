@@ -5,11 +5,11 @@ import (
 	"errors"
 	"github.com/piazzamp/goth"
 	"golang.org/x/net/context"
-	//"golang.org/x/oauth2"
-	"google.golang.org/appengine"
-	"net/http"
+	"golang.org/x/oauth2"
+
+	//"google.golang.org/appengine"
+	// "net/http"
 	"strings"
-	"sync"
 	"time"
 )
 
@@ -21,15 +21,6 @@ type Session struct {
 	ExpiresAt    time.Time
 }
 
-var cont context.Context
-var mut sync.Mutex
-
-func SetContext(r *http.Request) {
-	mut.Lock()
-	cont = appengine.NewContext(r)
-	mut.Unlock()
-}
-
 // GetAuthURL will return the URL set by calling the `BeginAuth` function on the Google+ provider.
 func (s Session) GetAuthURL() (string, error) {
 	if s.AuthURL == "" {
@@ -39,9 +30,22 @@ func (s Session) GetAuthURL() (string, error) {
 }
 
 // Authorize the session with Google+ and return the access token to be stored for future use.
+func (s *Session) AppEngineAuthorize(provider goth.Provider, params goth.Params, ctx context.Context) (string, error) {
+	p := provider.(*Provider)
+	token, err := p.config.Exchange(ctx, params.Get("code"))
+	if err != nil {
+		return "", err
+	}
+	s.AccessToken = token.AccessToken
+	s.RefreshToken = token.RefreshToken
+	s.ExpiresAt = token.Expiry
+	return token.AccessToken, err
+
+}
+
 func (s *Session) Authorize(provider goth.Provider, params goth.Params) (string, error) {
 	p := provider.(*Provider)
-	token, err := p.config.Exchange(cont, params.Get("code"))
+	token, err := p.config.Exchange(oauth2.NoContext, params.Get("code"))
 	if err != nil {
 		return "", err
 	}

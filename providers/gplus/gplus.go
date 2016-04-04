@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"github.com/piazzamp/goth"
+	"golang.org/x/net/context"
 	"golang.org/x/oauth2"
 	//"google.golang.org/appengine"
 	"io"
@@ -143,10 +144,20 @@ func (p *Provider) RefreshTokenAvailable() bool {
 	return true
 }
 
+func (p *Provider) AppEngineRefreshToken(refreshToken string, ctx context.Context) (*oauth2.Token, error) {
+	token := &oauth2.Token{RefreshToken: refreshToken}
+	ts := p.config.TokenSource(ctx, token)
+	newToken, err := ts.Token()
+	if err != nil {
+		return nil, err
+	}
+	return newToken, err
+}
+
 //RefreshToken get new access token based on the refresh token
 func (p *Provider) RefreshToken(refreshToken string) (*oauth2.Token, error) {
 	token := &oauth2.Token{RefreshToken: refreshToken}
-	ts := p.config.TokenSource(cont, token)
+	ts := p.config.TokenSource(oauth2.NoContext, token)
 	newToken, err := ts.Token()
 	if err != nil {
 		return nil, err
