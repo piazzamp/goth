@@ -15,7 +15,7 @@ import (
 
 	"github.com/gorilla/sessions"
 	"github.com/piazzamp/goth"
-	"github.com/piazzamp/goth/providers/gplus"
+	//"github.com/piazzamp/goth/providers/gplus"
 )
 
 // SessionName is the key used to access the session store.
@@ -51,7 +51,7 @@ func BeginAuthHandler(res http.ResponseWriter, req *http.Request) {
 		fmt.Fprintln(res, err)
 		return
 	}
-	gplus.SetContext(req)
+	// gplus.SetContext(req)
 	http.Redirect(res, req, url, http.StatusTemporaryRedirect)
 }
 
@@ -132,7 +132,7 @@ See https://github.com/piazzamp/goth/examples/main.go to see this in action.
 */
 var CompleteUserAuth = func(res http.ResponseWriter, req *http.Request) (goth.User, error) {
 
-	if !keySet || defaultStore == Store {
+	if !keySet && defaultStore == Store {
 		fmt.Println("goth/gothic: no SESSION_SECRET environment variable is set. The default cookie store is not available and any calls will fail. Ignore this warning if you are using a different store.")
 	}
 
