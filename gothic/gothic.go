@@ -10,6 +10,7 @@ package gothic
 import (
 	"errors"
 	"fmt"
+	"github.com/gorilla/mux"
 	"net/http"
 	"os"
 
@@ -179,7 +180,11 @@ func getProviderName(req *http.Request) (string, error) {
 		provider = req.URL.Query().Get(":provider")
 	}
 	if provider == "" {
-		return provider, errors.New("you must select a provider")
+		provider = mux.Vars(req)["provider"]
+	}
+	if provider == "" {
+		return "", errors.New("couldn't find the provider name in the URL path or query string")
+
 	}
 	return provider, nil
 }
